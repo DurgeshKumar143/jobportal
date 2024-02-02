@@ -5,6 +5,7 @@ import fileUpload from "express-fileupload";
 import userRouter from "./router/userRouter.js"
 import jobRouter from "./router/jobRouter.js"
 import applicationRouter from "./router/applicationRouter.js"
+import { errorMiddleware } from "./middleware/error.js";
 const app=express()
 
 app.use(cors({
@@ -29,4 +30,7 @@ app.use("/api/v1/application",applicationRouter)
 
 
 
+
+
+app.use(errorMiddleware)
 export default app

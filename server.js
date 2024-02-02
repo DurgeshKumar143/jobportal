@@ -2,6 +2,14 @@ import app from "./app.js";
 import dotenv from "dotenv"
 import connectDB from "./database/index.js";
 
+
+
+process.on("uncaughtException",(err)=>{
+    console.log(`Error: ${err.message}`)
+    console.log(`shutting down the server due to Uncaught Exception`)
+    process.exit(1)
+})
+
 dotenv.config({
     path:'./config/.env'
 })
@@ -16,4 +24,15 @@ connectDB().then(()=>{
     process.exit()
 })
 
+
+
+// unhanled Promise Rejection
+process.on("unhandledRejection",(err)=>{
+    console.log(`Error : ${err.message}`)    
+    console.log(`Shuting down the server due to Unhandle Promise Rejection`)
+    server.close(()=>{
+        process.exit(1);
+    })
+
+})
 
