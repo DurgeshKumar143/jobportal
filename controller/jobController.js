@@ -79,9 +79,9 @@ export const updateJob=asyncHandler(async(req,res,next)=>{
     }
 
     const {id}=req.params;
-    console.log("This is job section to find ",id)
+    c 
     let job=await Job.findById(id);
-    console.log("This is job find user ",job)
+    
     if(!job){
         return next(new ErrorHandler("Oops , Job Not Found ",404))
     }
