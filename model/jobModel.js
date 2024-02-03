@@ -8,7 +8,7 @@ const JobSchema=new mongoose.Schema({
         minLength:[3,"Job title must contain at least 3 character"],
         maxLength:[50,"Job Title con't exceed 50 character"]
     },
-    discription:{
+    description:{
         type:String,
         required:[true,"Please provide job discription"],
 
@@ -31,7 +31,7 @@ const JobSchema=new mongoose.Schema({
     },
     fixedSalary:{
         type:Number,
-        required:true
+         
     },
     salaryFrom:{
         type:Number,
@@ -39,7 +39,7 @@ const JobSchema=new mongoose.Schema({
     },
     salaryTo:{
         type:Number,
-        required:true
+         required:true
     },
     expired:{
         type:Boolean,

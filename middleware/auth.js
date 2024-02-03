@@ -14,7 +14,8 @@ export const isAuthorized=asyncHandler(async(req,res,next)=>{
 
     const decode = jwt.verify(token,process.env.ACCESS_TOKEN_SECRET)
 
-    req.user=await User.findById(decode.id)
+    req.user=await User.findById(decode._id)
+     
     next();
 
 })
