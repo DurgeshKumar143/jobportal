@@ -79,7 +79,7 @@ export const updateJob=asyncHandler(async(req,res,next)=>{
     }
 
     const {id}=req.params;
-    c 
+    
     let job=await Job.findById(id);
     
     if(!job){
@@ -96,4 +96,26 @@ export const updateJob=asyncHandler(async(req,res,next)=>{
         job,
         message:"Job Updated SuccessFully"
     })
+})
+
+
+export const deleteJob=asyncHandler(async(req,res,next)=>{
+    const role=req.user.role
+    if(role ==="jobseeker"){
+        return next(new ErrorHandler("Job seeker is not allowed to find your job  ",400))
+    }
+
+    let job=await Job.findById(id);
+    
+    if(!job){
+        return next(new ErrorHandler("Oops , Job Not Found ",404))
+    }
+    await Job.deleteOne();
+
+    res.status(200).json({
+        success:true,
+        message:"Job Deleted successFully"
+    })
+
+
 })
