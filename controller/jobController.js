@@ -105,6 +105,8 @@ export const deleteJob=asyncHandler(async(req,res,next)=>{
         return next(new ErrorHandler("Job seeker is not allowed to find your job  ",400))
     }
 
+    const id=req.params
+
     let job=await Job.findById(id);
     
     if(!job){
