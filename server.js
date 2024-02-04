@@ -1,6 +1,17 @@
 import app from "./app.js";
 import dotenv from "dotenv"
 import connectDB from "./database/index.js";
+import {v2 as cloudinary} from 'cloudinary';
+
+dotenv.config({
+    path:'./config/.env'
+})
+
+cloudinary.config({ 
+    cloud_name:process.env.CLOUD_NAME, 
+    api_key: process.env.CLOUD_API_KEY, 
+    api_secret:process.env.CLOUD_API_SECRET 
+  });
 
 
 
@@ -10,9 +21,7 @@ process.on("uncaughtException",(err)=>{
     process.exit(1)
 })
 
-dotenv.config({
-    path:'./config/.env'
-})
+
 
 
 connectDB().then(()=>{

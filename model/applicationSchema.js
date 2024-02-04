@@ -43,7 +43,7 @@ const applicationSchema=new mongoose.Schema({
         },
         role:{
             type:String,
-            enum:["joobseeker"],
+            enum:["jobseeker"],
             required:true
         }
 

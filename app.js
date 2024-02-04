@@ -18,11 +18,11 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
 app.use(cookieParser())
+
 app.use(fileUpload({
     useTempFiles:true,
     tempFileDir:"/temp"
 }))
-
 
 app.use("/api/v1/user",userRouter)
 app.use("/api/v1/job",jobRouter)
