@@ -83,3 +83,12 @@ export const userLogOut=asyncHandler(async(req,res,next)=>{
         message:"User logged Out successFully"
     })
 })
+
+
+export const getUser=asyncHandler(async(req,res,next)=>{
+    const user=req.user
+    res.status(200).json({
+        success:true,
+        user
+    })
+})
