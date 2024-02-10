@@ -17,7 +17,7 @@ const UserSchema=new mongoose.Schema({
         unique:[true,"This email already exits"]
     },
     mobile:{
-        type:Number,
+        type:String,
         required:[true,"Please provide a number"],
         unique:true
     },

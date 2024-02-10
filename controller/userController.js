@@ -3,19 +3,23 @@ import  asyncHandler from "../utils/asyncHandler.js";
 import ErrorHandler from "../middleware/error.js";
 import { sendTOken } from "../utils/jwtToken.js";
 
-
 export const register=asyncHandler(async(req,res,next)=>{
     const {fullName,password,email,mobile,role}=req.body
-    if(!fullName || !password || !email || !mobile || !role){
+
+
+    if(!fullName || !password || !email || !mobile || !role){  
         return next(new ErrorHandler("All Field is required",400))
     }
-
+    
     const UserExit= await User.findOne({
-        $or:[{email},{mobile}]
+        $or:[{email}]
     })
+
     if(UserExit){
+        console.log("THis is second ",fullName)
         return next(new ErrorHandler("User Already exits",400))
     }
+    
 
     const user= await User.create({
         fullName,
@@ -23,7 +27,7 @@ export const register=asyncHandler(async(req,res,next)=>{
         mobile,
         password,
         role
-    })
+        })
 
     const createdUser=await User.findById(user._id).select("-password")
 
@@ -86,9 +90,12 @@ export const userLogOut=asyncHandler(async(req,res,next)=>{
 
 
 export const getUser=asyncHandler(async(req,res,next)=>{
+   
     const user=req.user
+    
     res.status(200).json({
         success:true,
         user
     })
+    
 })
