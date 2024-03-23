@@ -31,15 +31,17 @@ const JobSchema=new mongoose.Schema({
     },
     fixedSalary:{
         type:Number,
+        required:false,
+        
          
     },
     salaryFrom:{
         type:Number,
-        required:true
+        required:false
     },
     salaryTo:{
         type:Number,
-         required:true
+         required:false
     },
     expired:{
         type:Boolean,

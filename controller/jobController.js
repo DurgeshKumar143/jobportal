@@ -8,7 +8,8 @@ export const getAllJob=asyncHandler(async(req,res,next)=>{
         success:true,
         jobs
     })
-})
+});
+
 
 export const postJob=asyncHandler(async(req,res,next)=>{
      
@@ -26,9 +27,9 @@ export const postJob=asyncHandler(async(req,res,next)=>{
     if((!salaryFrom || !salaryTo) && !fixedSalary){
         return next(new ErrorHandler("Please either provide fixed salary or range salary",400))
     }
-    if(salaryFrom && salaryTo && fixedSalary){
-        return next(new ErrorHandler("Con't enter salary and range salary together"))
-    }
+    // if(salaryFrom && salaryTo && fixedSalary){
+    //     return next(new ErrorHandler("Con't enter salary and range salary together"))
+    // }
 
     const postedBy=req.user._id
 
@@ -41,7 +42,8 @@ export const postJob=asyncHandler(async(req,res,next)=>{
         location,
         salaryFrom,
         salaryTo,
-        postedBy
+        postedBy,
+        fixedSalary,
     })
 
     res.status(200).json({
@@ -60,6 +62,7 @@ export  const getmyJob=asyncHandler(async(req,res,next)=>{
     }
 
     const myjobs=await Job.find({postedBy:req.user._id});
+     
     if(!myjobs){
         return next(new ErrorHandler("You are not posted any job",400))
     }
@@ -105,7 +108,9 @@ export const deleteJob=asyncHandler(async(req,res,next)=>{
         return next(new ErrorHandler("Job seeker is not allowed to find your job  ",400))
     }
 
-    const id=req.params
+
+    const {id}=req.params
+    
 
     let job=await Job.findById(id);
     

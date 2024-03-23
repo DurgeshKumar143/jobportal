@@ -16,7 +16,7 @@ export const register=asyncHandler(async(req,res,next)=>{
     })
 
     if(UserExit){
-        console.log("THis is second ",fullName)
+        
         return next(new ErrorHandler("User Already exits",400))
     }
     
@@ -58,9 +58,15 @@ export const loginUser=asyncHandler(async(req,res,next)=>{
     return next(new ErrorHandler("Provide all Requirment",403))
   }
 
-  const user=await User.findOne({
-    $or:[{email},{mobile}]
-  })
+   
+
+//   const user=await User.findOne({
+//     $or:[{email},{mobile}]
+//   })
+
+const user=await User.findOne({email:email})
+
+
   if(!user){
     return next(new ErrorHandler("User Not exit",403))
   }

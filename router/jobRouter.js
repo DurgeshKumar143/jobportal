@@ -11,7 +11,7 @@ router.route("/myjob").get(isAuthorized,getmyJob)
 
 router.route("/update/:id").put(isAuthorized,updateJob)
 
-router.route("/deleteJob").delete(deleteJob)
+router.route("/delete/:id").delete(isAuthorized,deleteJob)
 router.route("/:id").get(isAuthorized,getSingleJob)
 
 

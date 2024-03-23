@@ -68,12 +68,11 @@ export const postApllication=asyncHandler(async(req,res,next)=>{
     if(role==="Employer"){
         return next(new ErrorHandler("Employer is not allowed to post job"))
     }
+
+    const {resume}=req.files;
     if(!req.files || Object.keys(req.files).length===0){
         return next(new ErrorHandler("Resume file Required"))
     }
-
-    const {resume}=req.files;
-     
 
     const allowedFormate=['image/jpeg','image/png','image/webp']
     if(!allowedFormate.includes(resume.mimetype)){
@@ -81,16 +80,8 @@ export const postApllication=asyncHandler(async(req,res,next)=>{
 
     }
 
+
     
-
-    const cloudinaryResponse= await cloudinary.uploader.upload(resume.tempFilePath)
-     
-
-    if(!cloudinaryResponse || cloudinaryResponse.error){
-        console.error("Cloudinary Error : ",cloudinaryResponse.error || "Unknown Cloudinary error")
-
-        return next(new ErrorHandler("Failed to upload resume ",404))
-    }
 
     const {name,email,coverleter,mobile,address,jobId}=req.body
 
@@ -113,9 +104,33 @@ export const postApllication=asyncHandler(async(req,res,next)=>{
         user:jobDetails.postedBy,
         role:"Employer"
     }
-    if(!name || !email || !coverleter || !mobile || !address || !applicantID || !employerID ||!resume ){
+     
+    if(!name || !email || !coverleter || !mobile || !address || !applicantID || !employerID || !resume ){
         return next(new ErrorHandler("Please Fill all field ",400))
     }
+
+    // THis is to upload  the resume to the cloudinary server
+    const cloudinaryResponse= await cloudinary.uploader.upload(resume.tempFilePath)
+
+    if(!cloudinaryResponse || cloudinaryResponse.error){
+        console.error("Cloudinary Error : ",cloudinaryResponse.error || "Unknown Cloudinary error")
+
+        return next(new ErrorHandler("Failed to upload resume ",404))
+    }
+
+    console.log("Name is  ",name);
+    console.log("Email is  ",email);
+    console.log("CoverLetter is  ",coverleter);
+    console.log("Mobile is  ",mobile);
+    console.log("Address is  ",address);
+    console.log("ApplicantID is  ",applicantID);
+    console.log("EmployerID is  ",employerID);
+    console.log("Resume is public id is   ",cloudinaryResponse.public_id);
+    console.log("Resume is resume url url is   ",cloudinaryResponse.secure_url);
+
+    
+
+    
 
     const application=await Application.create({
         name,email,coverleter,mobile,address,
