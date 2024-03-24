@@ -1,6 +1,6 @@
 import app from "./app.js";
 
-// import connectDB from "./database/index.js";
+import connectDB from "./database/index.js";
 import {v2 as cloudinary} from 'cloudinary';
 
 
@@ -20,19 +20,16 @@ process.on("uncaughtException",(err)=>{
     process.exit(1)
 })
 
+ 
 
- app.listen(process.env.PORT || 800,()=>{
-         console.log(`Server is running port ${process.env.PORT}`)
+connectDB().then(()=>{
+    app.listen(process.env.PORT || 800,()=>{
+        console.log(`Server is running port ${process.env.PORT}`)
     })
-
-// connectDB().then(()=>{
-//     app.listen(process.env.PORT || 800,()=>{
-//         console.log(`Server is running port ${process.env.PORT}`)
-//     })
-// }).catch((error)=>{
-//     console.log("MongoDb Connection Error ",error)
-//     process.exit()
-// })
+}).catch((error)=>{
+    console.log("MongoDb Connection Error ",error)
+    process.exit()
+})
 
 
 
