@@ -40,7 +40,10 @@ app.use("/api/v1/user",userRouter)
 app.use("/api/v1/jobs",jobRouter)
 app.use("/api/v1/application",applicationRouter)
 
-
+app.get("/",(req,res)=>{
+    res.send("API is running");
+    console.log("API is Live");
+});
 
 
 
