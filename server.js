@@ -20,8 +20,7 @@ process.on("uncaughtException",(err)=>{
     process.exit(1)
 })
 
-
-
+ 
 
 connectDB().then(()=>{
     app.listen(process.env.PORT || 800,()=>{
