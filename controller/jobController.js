@@ -54,7 +54,7 @@ export const postJob=asyncHandler(async(req,res,next)=>{
 
 })
 
-
+// this is get all job for user
 export  const getmyJob=asyncHandler(async(req,res,next)=>{
     const role=req.user.role
     if(role ==="jobseeker"){
