@@ -16,7 +16,7 @@ dotenv.config({
 
 app.use(
     cors({
-      origin: ["https://dkjobfinder.netlify.app"],
+      origin: "https://dkjobfinder.netlify.app",
       method: ["GET", "POST", "DELETE", "PUT"],
       credentials: true,
     })

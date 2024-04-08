@@ -43,6 +43,7 @@ export const register=asyncHandler(async(req,res,next)=>{
 // This is login section 
 
 export const loginUser=asyncHandler(async(req,res,next)=>{
+    
     // req->body Data
   // userName Email
   // find the user
@@ -80,8 +81,6 @@ sendTOken(user,200,res,"User Login Successfully")
 
 
 })
-
-
 
 export const userLogOut=asyncHandler(async(req,res,next)=>{
     res.cookie("token",null,{
