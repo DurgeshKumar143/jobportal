@@ -11,7 +11,6 @@ cloudinary.config({
     api_secret:process.env.CLOUD_API_SECRET 
   });
 
-  
 
 
 process.on("uncaughtException",(err)=>{
@@ -23,7 +22,7 @@ process.on("uncaughtException",(err)=>{
  
 
 connectDB().then(()=>{
-    app.listen(process.env.PORT || 800,()=>{
+    app.listen(process.env.PORT || 5000,()=>{
         console.log(`Server is running port ${process.env.PORT}`)
     })
 }).catch((error)=>{

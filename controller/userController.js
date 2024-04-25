@@ -77,6 +77,9 @@ if(!isPassWordCurrect){
     return next(new ErrorHandler("Invalid User Credentials"))
 }
 
+console.log(user)
+console.log(res)
+
 sendTOken(user,200,res,"User Login Successfully")
 
 
